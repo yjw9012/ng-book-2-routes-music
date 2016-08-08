@@ -23,6 +23,8 @@ import {
  */
 import {SearchComponent} from 'components/SearchComponent';
 import {TrackComponent} from 'components/TrackComponent';
+import {ArtistComponent} from "./components/ArtistComponent";
+import {AlbumComponent} from "./components/AlbumComponent";
 
 /*
  * Services
@@ -49,7 +51,9 @@ class RoutesDemoApp {
 const routes: RouterConfig = [
     { path: '', redirectTo: 'search', terminal: true },
     { path: 'search', component: SearchComponent },
-    { path: 'tracks/:id', component: TrackComponent }
+    { path: 'tracks/:id', component: TrackComponent },
+    { path: 'artists/:id', component: ArtistComponent },
+    { path: 'albums/:id', component: AlbumComponent }
 ];
 
 const ROUTER_PROVIDER = provideRouter(routes);
