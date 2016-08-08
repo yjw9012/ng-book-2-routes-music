@@ -22,6 +22,7 @@ import {
  * Components
  */
 import {SearchComponent} from 'components/SearchComponent';
+import {TrackComponent} from 'components/TrackComponent';
 
 /*
  * Services
@@ -38,7 +39,7 @@ require('css/styles.scss');
     selector: 'router-app',
     directives: [ROUTER_DIRECTIVES],
     template: `
-  <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
   `
 })
 class RoutesDemoApp {
@@ -47,7 +48,8 @@ class RoutesDemoApp {
 
 const routes: RouterConfig = [
     { path: '', redirectTo: 'search', terminal: true },
-    { path: 'search', component: SearchComponent }
+    { path: 'search', component: SearchComponent },
+    { path: 'tracks/:id', component: TrackComponent }
 ];
 
 const ROUTER_PROVIDER = provideRouter(routes);

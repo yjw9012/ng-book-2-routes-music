@@ -6,21 +6,34 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class SpotifyService {
-    private static QUERY_URL_PREFIX: string = "https://api.spotify.com/v1/search?";
+    private static QUERY_URL_PREFIX: string = "https://api.spotify.com/v1";
 
     constructor(public http: Http) {}
 
-    searchByTrack(query: string) {
-        const params: string = [
-            `q=${query}`,
-            `type=track`
-        ].join("&");
+    query(url: string, params?: string[]): Observable<any[]> {
+        let queryUrl: string = `${SpotifyService.QUERY_URL_PREFIX}${url}`;
 
-        const queryUrl: string = `${SpotifyService.QUERY_URL_PREFIX}${params}`;
+        if (params) {
+            queryUrl = `${queryUrl}?${params.join("&")}`;
+        }
 
         return this.http.request(queryUrl).map(res => res.json());
     }
 
+    search(query: string, type: string): Observable<any[]> {
+        return this.query("/search", [
+            `q=${query}`,
+            `type=${type}`
+        ]);
+    }
+
+    searchByTrack(query: string): Observable<any[]> {
+        return this.search(query, "track");
+    }
+
+    getTrack(id: string): Observable<any[]> {
+        return this.query(`/tracks/${id}`);
+    }
 }
 
 
